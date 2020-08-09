@@ -1,68 +1,67 @@
-#page-teacher-list{
-    width:100vw;
-    height:100vh;
+#page-teacher-list {
+  width: 100vw;
+  height: 100vh;
 }
 
-.page-header{
-    display:flex;
-    flex-direction:column;
-    background-color: var(--color-primary);
+.page-header {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-primary);
 }
 
-.top-bar-container{
-    width:90%;
-    margin:0 auto;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    color: var(--color-text-in-primary);
-    padding:1.6rem 0;
+.top-bar-container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text-in-primary);
+  padding: 1.6rem 0;
 }
 
-.top-bar-container a{
-    height:3.2rem;
-    transition: opacity 0.2s;
+.top-bar-container a {
+  height: 3.2rem;
+  transition: opacity 0.2s;
 }
 
-.top-bar-container a:hover{
-    opacity: 0.6;
+.top-bar-container a:hover {
+  opacity: 0.6;
 }
 
 .top-bar-container > img {
-    height: 1.6rem;
+  height: 1.6rem;
 }
 
 .header-content {
-    width: 90%;
-    margin: 0 auto;
-    position: relative;
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
 }
 
-.header-content strong{
-    font: 700 3.6 Archivo;
-    line-height:5rem;
-    color:var(--color-title-in-primary)
+.header-content strong {
+  font: 700 3.6 Archivo;
+  line-height: 5rem;
+  color: var(--color-title-in-primary);
 }
 
 #search-teachers {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 #search-teachers label {
-    color:var(--color-text-in-primary)
+  color: var(--color-text-in-primary);
 }
 
-@media(min-width:700px){
-    #page-teacher-list {
-        max-width:100%;
-    }
+@media (min-width: 700px) {
+  #page-teacher-list {
+    max-width: 100%;
+  }
 
-    #search-teachers{
-        display: grid;
-        grid-template-columns: repeat(3,1fr);
-        column-gap:16px;
-        position:absolute;
-        top:17.3rem;
-    }
-    
+  #search-teachers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 16px;
+    position: absolute;
+    top: 17.3rem;
+  }
 }
