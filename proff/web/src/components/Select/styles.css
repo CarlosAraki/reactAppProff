@@ -21,7 +21,7 @@
     outline:0;
     padding: 0 1.6rem;
     resize:vertical;
-    font: 1.6rem Archivo
+    font: 1rem Archivo
 }
 
 .select-block:focus-within::after{

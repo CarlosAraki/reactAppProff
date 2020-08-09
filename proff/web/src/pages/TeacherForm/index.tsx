@@ -47,6 +47,49 @@ function TeacherForm() {
                   />
                 <Input  name="cost" label="Custo da aula"/>
               </fieldset>
+              
+              <fieldset>
+                <legend>Horários Disponíveis
+                  <button type='button'>
+                    + Novo Horário
+                  </button>
+                </legend>
+
+                <div className='schedule-item'>
+                  <Select  
+                    name="week-day" 
+                    label="Dia da Semana"
+                    options={
+                      [
+                        {
+                          value:'1',label:'Domingo'
+                        },
+                        {
+                          value:'2',label:'Segunda'
+                        },
+                        {
+                          value:'3',label:'Terça'
+                        },
+                        {
+                          value:'4',label:'Quarta'
+                        },
+                        {
+                          value:'5',label:'Quinta'
+                        },
+                        {
+                          value:'6',label:'Sexta'
+                        },
+                        {
+                          value:'7',label:'Sábado'
+                        },
+                      ]
+                    }
+                    />
+                  <Input  name="from" label="Das" type='time'/>
+                  <Input  name="to" label="Até" type='time'/>
+                </div>
+              </fieldset>
+
               <footer>
                 <p>
                   <img 
