@@ -41,7 +41,14 @@
 .header-content strong{
     font: 700 3.6rem Archivo;
     line-height:5rem;
-    color:var(--color-title-in-primary)
+    color:var(--color-title-in-primary);
+}
+
+.header-content p{
+    line-height:2rem;
+    font-size: 1.6rem;
+    max-width: 30rem;
+    color:var(--color-text-in-primary)
 }
 
 @media(min-width:700px){
@@ -64,6 +71,6 @@
     }
 
     .page-header .header-content strong{
-        padding: 4rem;
+        padding: 2rem;
     }
 }
