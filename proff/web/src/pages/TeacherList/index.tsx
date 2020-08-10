@@ -11,12 +11,14 @@ import api from "../../services/api";
 function TeacherList() {
   const[teachers,setTeachers] = useState([])
 
-  const [subject, setSubject] = useState();
-  const [week_day, setWeekDay] = useState();
-  const [time, setTime] = useState();
+  const [subject, setSubject] = useState('');
+  const [week_day, setWeekDay] = useState('');
+  const [time, setTime] = useState('');
 
   async function searchTeachers(e: FormEvent) {
     e.preventDefault();
+    console.log(subject)
+
    const resp = await api.get('classes',{
       params:{
         subject,
@@ -25,6 +27,7 @@ function TeacherList() {
       }
     });
 
+    console.log(resp.data)
     setTeachers(resp.data)
   }
 
@@ -36,7 +39,7 @@ function TeacherList() {
             name="subject"
             label="Matéria"
             value={subject}
-            
+            onChange={(e) => setSubject(e.target.value)}
             options={[
               {
                 value: "Artes",
@@ -59,6 +62,9 @@ function TeacherList() {
           <Select
             name="week_day"
             label="Dia da Semana"
+            value={week_day}
+            onChange={(e) => setWeekDay(e.target.value)}
+
             options={[
               {
                 value: "1",
@@ -93,7 +99,9 @@ function TeacherList() {
           <Input 
             type="time" 
             name="time" 
-            label="Hora" />
+            label="Hora" 
+            onChange={(e) => setTime(e.target.value)}
+            />
 
           <button type='submit'>
             Buscar
