@@ -33,7 +33,6 @@ yarn-error.log*
 *.mobileprovision
 *.orig.*
 /mobile/web-build/
-
 # macOS
 .DS_Store
 
