@@ -7,6 +7,7 @@ import warnigIcon from "../../assets/images/icons/warning.svg";
 import "./styles.css";
 import Textarea from "../../components/Textarea";
 import Select from "../../components/Select";
+import api from "../../services/api";
 
 function TeacherForm() {
   const [name,setName] = useState('');
@@ -35,12 +36,24 @@ function TeacherForm() {
         }
       ]
     );
-    console.log('aaa');
   }
 
   function handleCreateClass(e: FormEvent){
     e.preventDefault();
-    console.log('aaa');
+
+    api.post('classes',{
+      name,
+      avatar,
+      whatsapp,
+      bio,
+      subject,
+      cost:Number(cost),
+      schedule:scheduleItems
+    }).then(()=>{
+      alert('Cadastro realizado')
+    }).catch(()=>{
+      alert('Erro no Cadastro')
+    })
   }
 
   function setScheduleItemValue(position:number,field:string,value:string){
