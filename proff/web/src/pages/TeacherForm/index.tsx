@@ -19,7 +19,7 @@ function TeacherForm() {
 
   const [scheduleItems,setScheduleItems] = useState([
     {
-      week_day:0,
+      week_day:1,
       from:'',
       to:''
     },
@@ -30,12 +30,24 @@ function TeacherForm() {
       [
         ...scheduleItems,
         {
-          week_day:0,
+          week_day:1,
           from:'',
           to:''
         }
       ]
     );
+  }
+
+  function setScheduleItemValue(position:number,field:string,value:string){
+    const newArray = scheduleItems.map((scheduleItem,index)=>{
+      if(index === position ){
+        return {...scheduleItem, [field]:value}
+      }else{
+        return scheduleItem        
+      }
+    })
+    console.log('aqui',newArray)
+    setScheduleItems(newArray);
   }
 
   function handleCreateClass(e: FormEvent){
@@ -56,15 +68,7 @@ function TeacherForm() {
     })
   }
 
-  function setScheduleItemValue(position:number,field:string,value:string){
-    const newArray = scheduleItems.map((scheduleItem,index)=>{
-      if(index === position ){
-        return {...scheduleItem, [field]:value}
-      }else{
-        return scheduleItem        
-      }
-    })
-  }
+  
 
 
   return (
@@ -149,9 +153,10 @@ function TeacherForm() {
 
             {scheduleItems.map((scheduleItem,index) => {
               return (
-                <div key={scheduleItem.week_day} className="schedule-item">
+                <div key={index} className="schedule-item">
                   <Select
                     name="week_day"
+                    value={scheduleItem.week_day}
                     label="Dia da Semana"
                     onChange={e=> setScheduleItemValue(index,'week_day',e.target.value)}
                     options={[
