@@ -1,17 +1,61 @@
-import React from "react";
+import React, { useState, FormEvent } from "react";
 
 import "./styles.css";
 import PageHeader from "../../components/PageHeader";
-import TeacherItem from "../../components/TeacherItem";
+import TeacherItem,{Teacher} from "../../components/TeacherItem";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
+import api from "../../services/api";
+
 
 function TeacherList() {
+  const[teachers,setTeachers] = useState([])
+
+  const [subject, setSubject] = useState();
+  const [week_day, setWeekDay] = useState();
+  const [time, setTime] = useState();
+
+  async function searchTeachers(e: FormEvent) {
+    e.preventDefault();
+   const resp = await api.get('classes',{
+      params:{
+        subject,
+        week_day,
+        time,
+      }
+    });
+
+    setTeachers(resp.data)
+  }
+
   return (
     <div id="page-teacher-list" className="container">
       <PageHeader title="Esses Proffs disponíveis">
-        <form id="search-teachers">
-          <Input name="subject" label="Matéria" />
+        <form id="search-teachers" onSubmit={searchTeachers}>
+          <Select
+            name="subject"
+            label="Matéria"
+            value={subject}
+            
+            options={[
+              {
+                value: "Artes",
+                label: "Artes",
+              },
+              {
+                value: "Math",
+                label: "Matematica",
+              },
+              {
+                value: "MC",
+                label: "MC",
+              },
+              {
+                value: "Port",
+                label: "Português",
+              },
+            ]}
+          />
           <Select
             name="week_day"
             label="Dia da Semana"
@@ -46,26 +90,25 @@ function TeacherList() {
               },
             ]}
           />
-          <Input type="time" name="time" label="Hora" />
+          <Input 
+            type="time" 
+            name="time" 
+            label="Hora" />
+
+          <button type='submit'>
+            Buscar
+          </button>
         </form>
       </PageHeader>
 
-      <TeacherItem
-        title="Olá"
-        content="Viva para sempre capivaraaaaa!"
-      ></TeacherItem>
-      <TeacherItem
-        title="Olá"
-        content="Viva para sempre capivaraaaaa!"
-      ></TeacherItem>
-      <TeacherItem
-        title="Olá"
-        content="Viva para sempre capivaraaaaa!"
-      ></TeacherItem>
-      <TeacherItem
-        title="Olá"
-        content="Viva para sempre capivaraaaaa!"
-      ></TeacherItem>
+      <main>
+        {
+          teachers.map( (teacher:Teacher) =>{
+            return <TeacherItem key={teacher.id} teacher = {teacher}/>
+          })
+        }
+      </main>
+     
     </div>
   );
 }

@@ -7,33 +7,42 @@ import logoImg from "../../assets/images/logo.svg";
 import "./styles.css";
 import wppIcon from "../../assets/images/icons/whatsapp.svg";
 
-interface TeacherItemProps {
-  title: string;
-  content?: string;
+export interface Teacher {
+  id:number;
+  avatar:string;
+  name:string;
+  bio:string;
+  cost:number;
+  subject:string;
+  whatsapp:string;
 }
 
-const TeacherItem: React.FC<TeacherItemProps> = (props) => {
+interface TeacherItemProps {
+  teacher: Teacher
+}
+
+const TeacherItem: React.FC<TeacherItemProps> = ({teacher}) => {
   return (
     <main>
       <article className="teacher-item">
         <header>
-          <img src="https://www.infoescola.com/wp-content/uploads/2008/05/capivara-119654188-600x400.jpg"></img>
+          <img src={teacher.avatar}></img>
         </header>
+        <div>
+          <strong>{teacher.name}</strong>
+          <span>{teacher.subject}</span>
+        </div>
 
         <p>
-          {props.title}
-          <br />
-          <br />
-          {props.content}
+          {teacher.bio}
         </p>
 
         <footer>
           <p>
             Preço/hora
-            <strong>R$ 80,00</strong>
+            <strong>R$ {teacher.cost}</strong>
           </p>
           <button>
-            {" "}
             Contato
             <img src={wppIcon} alt="Wpp" />
           </button>
