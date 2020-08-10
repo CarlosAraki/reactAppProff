@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import PageHeader from "../../components/PageHeader";
 import Input from "../../components/Input";
 
@@ -9,16 +9,18 @@ import Textarea from "../../components/Textarea";
 import Select from "../../components/Select";
 
 function TeacherForm() {
+  const [name,setName] = useState('');
+  const [avatar,setAvatar] = useState('');
+  const [whatsapp,setWhatsapp] = useState('');
+  const [bio,setBio] = useState('');
+  const [subject,setSubject] = useState('');
+  const [cost,setCost] = useState('');
+
   const [scheduleItems,setScheduleItems] = useState([
     {
       week_day:0,
-      from:'8:00 AM',
-      to:'4:00 PM'
-    },
-    {
-      week_day:2,
-      from:'10:00 AM',
-      to:'2:00 PM'
+      from:'',
+      to:''
     },
   ]);
 
@@ -36,6 +38,20 @@ function TeacherForm() {
     console.log('aaa');
   }
 
+  function handleCreateClass(e: FormEvent){
+    e.preventDefault();
+    console.log('aaa');
+  }
+
+  function setScheduleItemValue(position:number,field:string,value:string){
+    const newArray = scheduleItems.map((scheduleItem,index)=>{
+      if(index === position ){
+        return {...scheduleItem, [field]:value}
+      }else{
+        return scheduleItem        
+      }
+    })
+  }
 
 
   return (
@@ -45,98 +61,146 @@ function TeacherForm() {
         description="Preencher formulário de inscrição"
       />
       <main>
-        <fieldset>
-          <legend> Dados do Usuário</legend>
-          <Input name="name" label="Nome" />
-          <Input name="avatar" label="Avatar" />
-          <Input name="whatsapp" label="Whatsapp" />
-          <Textarea name="bio" label="Biografia" />
-        </fieldset>
-        <fieldset>
-          <legend> Sobre a aula</legend>
-          <Select
-            name="subject"
-            label="Matéria"
-            options={[
-              {
-                value: "Artes",
-                label: "Artes",
-              },
-              {
-                value: "Math",
-                label: "Matematica",
-              },
-              {
-                value: "MC",
-                label: "MC",
-              },
-              {
-                value: "Port",
-                label: "Português",
-              },
-            ]}
-          />
-          <Input name="cost" label="Custo da aula" />
-        </fieldset>
+        <form onSubmit = {handleCreateClass}>
+          <fieldset>
+            <legend> Dados do Usuário</legend>
+            <Input 
+              name="name" 
+              label="Nome" 
+              value = {name} 
+              onChange ={(e)=>{setName(e.target.value)}}/>
+            <Input 
+              name="avatar" 
+              label="Avatar"
+              value = {avatar}
+              onChange ={(e)=>{
+                setAvatar(e.target.value)
+              }}     />
+            <Input 
+              name="whatsapp" 
+              label="Whatsapp"
+              value = {whatsapp}
+              onChange ={(e)=>{
+                setWhatsapp(e.target.value)
+              }}     />
+            <Textarea
+              name="bio" 
+              label="Biografia"
+              value = {bio}
+              onChange ={(e)=>{
+                setBio(e.target.value)
+              }}     />
+          </fieldset>
+          <fieldset>
+            <legend> Sobre a aula</legend>
+            <Select
+              name="subject"
+              label="Matéria"
+              value={subject}
+              onChange={(e) => {
+                setSubject(e.target.value)
+              }}
+              options={[
+                {
+                  value: "Artes",
+                  label: "Artes",
+                },
+                {
+                  value: "Math",
+                  label: "Matematica",
+                },
+                {
+                  value: "MC",
+                  label: "MC",
+                },
+                {
+                  value: "Port",
+                  label: "Português",
+                },
+              ]}
+            />
+            <Input 
+              name="cost" 
+              label="Custo da aula" 
+              value={cost}
+              onChange={(e) => {
+                setCost(e.target.value)
+              }}/>
+          </fieldset>
 
-        <fieldset>
-          <legend>
-            Horários Disponíveis
-            <button type="button" onClick={newScheduleItem}>+ Novo Horário</button>
-          </legend>
+          <fieldset>
+            <legend>
+              Horários Disponíveis
+              <button type="button" onClick={newScheduleItem}>+ Novo Horário</button>
+            </legend>
 
-          {scheduleItems.map((scheduleItem) => {
-            return (
-              <div key={scheduleItem.week_day} className="schedule-item">
-                <Select
-                  name="week-day"
-                  label="Dia da Semana"
-                  options={[
-                    {
-                      value: "1",
-                      label: "Domingo",
-                    },
-                    {
-                      value: "2",
-                      label: "Segunda",
-                    },
-                    {
-                      value: "3",
-                      label: "Terça",
-                    },
-                    {
-                      value: "4",
-                      label: "Quarta",
-                    },
-                    {
-                      value: "5",
-                      label: "Quinta",
-                    },
-                    {
-                      value: "6",
-                      label: "Sexta",
-                    },
-                    {
-                      value: "7",
-                      label: "Sábado",
-                    },
-                  ]}
-                />
-                <Input name="from" label="Das" type="time" />
-                <Input name="to" label="Até" type="time" />
-              </div>
-            );
-          })}
-        </fieldset>
+            {scheduleItems.map((scheduleItem,index) => {
+              return (
+                <div key={scheduleItem.week_day} className="schedule-item">
+                  <Select
+                    name="week_day"
+                    label="Dia da Semana"
+                    onChange={e=> setScheduleItemValue(index,'week_day',e.target.value)}
+                    options={[
+                      {
+                        value: "1",
+                        label: "Domingo",
+                      },
+                      {
+                        value: "2",
+                        label: "Segunda",
+                      },
+                      {
+                        value: "3",
+                        label: "Terça",
+                      },
+                      {
+                        value: "4",
+                        label: "Quarta",
+                      },
+                      {
+                        value: "5",
+                        label: "Quinta",
+                      },
+                      {
+                        value: "6",
+                        label: "Sexta",
+                      },
+                      {
+                        value: "7",
+                        label: "Sábado",
+                      },
+                    ]}
+                  />
+                  <Input 
+                  name="from" 
+                  label="Das"
+                  type="time"
+                  value = {scheduleItem.from}
+                  onChange = {(e)=>setScheduleItemValue(index,'from',e.target.value)}
+                  />
+                  <Input 
+                  name="to" 
+                  label="Até"
+                  type="time"
+                  value = {scheduleItem.to}
+                  onChange = {(e)=>setScheduleItemValue(index,'to',e.target.value)}
+                  />
+                </div>
+              );
+            })}
+          </fieldset>
 
-        <footer>
-          <p>
-            <img src={warnigIcon} alt="Aviso Importante" />
-            Importante ! <br />
-            Preencha todos os dados !
-          </p>
-          <button type="button">Salvar formulário</button>
-        </footer>
+          <footer>
+            <p>
+              <img src={warnigIcon} alt="Aviso Importante" />
+              Importante ! <br />
+              Preencha todos os dados !
+            </p>
+            <button type="submit">Salvar formulário</button>
+          </footer>
+
+        </form>
       </main>
     </div>
   );

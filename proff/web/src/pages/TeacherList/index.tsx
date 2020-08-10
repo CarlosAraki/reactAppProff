@@ -13,7 +13,7 @@ function TeacherList() {
         <form id="search-teachers">
           <Input name="subject" label="Matéria" />
           <Select
-            name="week-day"
+            name="week_day"
             label="Dia da Semana"
             options={[
               {
